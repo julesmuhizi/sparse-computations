@@ -19,6 +19,6 @@ for layer in keras_keys:
         weights, biases = model.get_layer(layer).get_weights()
     quantizer = model.get_layer(layer).quantizers
     weights = sparse.csr_matrix(quantizer[0](weights))
-    biases = sparse.csr_matrix(quantizer[1](biases))
+    biases = quantizer[1](biases)
     scipy.io.mmwrite('./model/ad08_0.9finSpar/{}_weights'.format(layer), weights)
-    scipy.io.mmwrite('./model/ad08_0.9finSpar/{}_bias'.format(layer), biases)
+    scipy.io.mmwrite('./model/ad08_0.9finSpar/{}_bias'.format(layer), [biases])
