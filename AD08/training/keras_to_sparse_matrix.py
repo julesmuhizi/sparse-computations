@@ -5,12 +5,7 @@ import scipy
 
 from keras_model import load_model
 model = load_model('./model/ad08_0.9finSpar/model_ToyCar.h5')
-keras_keys = ['q_dense_batchnorm',
- 'q_dense_batchnorm_1',
- 'q_dense_batchnorm_2',
- 'q_dense_batchnorm_3',
- 'q_dense_batchnorm_4',
- 'q_dense']
+keras_keys = [layer.name for layer in model.layers if 'dense' in layer.name]
 
 for layer in keras_keys:
     if 'batchnorm' in layer:
